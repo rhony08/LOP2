@@ -5,25 +5,25 @@ package org.d3ifcool.lop.models;
  */
 
 public class Target {
-    private String mId;
-    private String mNama;
-    private String mDesc;
+    private String id;
+    private String name;
+    private String desc;
 
-    public Target(String id, String nama, String desc){
-        mId =id;
-        mNama = nama;
-        mDesc =desc;
+    public Target(String id, String name, String desc){
+        this.id =id;
+        this.name = name;
+        this.desc =desc;
     }
 
-    public String getmId() {
-        return mId;
+    public String getId() {
+        return id;
     }
 
-    public String getmNama() {
-        return mNama;
+    public String getName() {
+        return name;
     }
 
-    public String getmDesc() {
-        return mDesc;
+    public String getDesc() {
+        return desc;
     }
 }

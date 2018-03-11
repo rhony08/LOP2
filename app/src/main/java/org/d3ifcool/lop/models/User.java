@@ -5,37 +5,37 @@ package org.d3ifcool.lop.models;
  */
 
 public class User {
-    private String mId;
-    private String mNama;
-    private String mTempatLahir;
-    private int mTanggalLahir;
-    private String mIdTipeKepribadian;
+    private String id;
+    private String name;
+    private String birthPlace;
+    private int birthDate;
+    private String idPersonality;
 
-    public User(String id, String nama, String tempatLahir, int tanggalLahir, String idTipeKepribadian){
-        mId = id;
-        mNama = nama;
-        mTempatLahir =tempatLahir;
-        mTanggalLahir = tanggalLahir;
-        mIdTipeKepribadian = idTipeKepribadian;
+    public User(String id, String name, String birthPlace, int birthDate, String idPersonality){
+        this.id = id;
+        this.name = name;
+        this.birthPlace = birthPlace;
+        this.birthDate = birthDate;
+        this.idPersonality = idPersonality;
     }
 
-    public String getmId() {
-        return mId;
+    public String getId() {
+        return id;
     }
 
-    public String getmNama() {
-        return mNama;
+    public String getName() {
+        return name;
     }
 
-    public String getmTempatLahir() {
-        return mTempatLahir;
+    public String getBirthPlace() {
+        return birthPlace;
     }
 
-    public int getmTanggalLahir() {
-        return mTanggalLahir;
+    public int getBirthDate() {
+        return birthDate;
     }
 
-    public String getmIdTipeKepribadian() {
-        return mIdTipeKepribadian;
+    public String getIdPersonality() {
+        return idPersonality;
     }
 }

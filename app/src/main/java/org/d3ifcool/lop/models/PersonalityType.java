@@ -5,37 +5,37 @@ package org.d3ifcool.lop.models;
  */
 
 public class PersonalityType {
-    private String mId;
-    private String mDesc;
-    private String mSifat;
-    private String mGambar;
-    private String mTargetPengembangan;
+    private String id;
+    private String desc;
+    private String character;
+    private String img;
+    private String devTarget;
 
-    public PersonalityType (String id, String desc, String sifat, String gambar, String targetPengembangan){
-        mId = id;
-        mDesc = desc;
-        mSifat = sifat;
-        mGambar = gambar;
-        mTargetPengembangan = targetPengembangan;
+    public PersonalityType (String id, String desc, String character, String img, String devTarget){
+        this.id = id;
+        this.desc = desc;
+        this.character = character;
+        this.img = img;
+        this.devTarget = devTarget;
     }
 
-    public String getmId() {
-        return mId;
+    public String getId() {
+        return id;
     }
 
-    public String getmDesc() {
-        return mDesc;
+    public String getDesc() {
+        return desc;
     }
 
-    public String getmGambar() {
-        return mGambar;
+    public String getImg() {
+        return img;
     }
 
-    public String getmSifat() {
-        return mSifat;
+    public String getCharacter() {
+        return character;
     }
 
-    public String getmTargetPengembangan() {
-        return mTargetPengembangan;
+    public String getDevTarget() {
+        return devTarget;
     }
 }

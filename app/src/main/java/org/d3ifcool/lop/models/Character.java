@@ -5,25 +5,25 @@ package org.d3ifcool.lop.models;
  */
 
 public class Character {
-    private String mId;
-    private String mNama;
-    private String mDesc;
+    private String id;
+    private String nama;
+    private String desc;
 
     public Character(String id, String nama, String desc){
-        mId =id;
-        mNama = nama;
-        mDesc =desc;
+        this.id = id;
+        this.nama = nama;
+        this.desc = desc;
     }
 
-    public String getmId() {
-        return mId;
+    public String getId() {
+        return id;
     }
 
-    public String getmNama() {
-        return mNama;
+    public String getNama() {
+        return nama;
     }
 
-    public String getmDesc() {
-        return mDesc;
+    public String getDesc() {
+        return desc;
     }
 }
