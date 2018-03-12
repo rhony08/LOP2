@@ -5,6 +5,9 @@
     <string name="sign_in">Sign In</string>
     <string name="birthday">Birthdate</string>
     <string name="click_to_set_date">Click to here Set Date</string>
+    <string name="next">Next</string>
+    <string name="result">Result</string>
+    <string name="skip">Skip</string>
     <string-array name="genders">
         <item>Male</item>
         <item>Female</item>

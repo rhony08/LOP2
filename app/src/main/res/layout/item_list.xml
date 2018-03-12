@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="target" type="org.d3ifcool.lop.models.Target"/>
+    </data>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_margin="@dimen/margin_medium"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_check_circle_24dp"/>
+        <LinearLayout
+            android:layout_margin="@dimen/margin_medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_medium"
+                android:text="@{target.name}"/>
+            <TextView
+                android:textSize="@dimen/text_size_small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{target.desc}"/>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

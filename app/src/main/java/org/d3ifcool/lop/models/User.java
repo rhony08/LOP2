@@ -1,7 +1,8 @@
 package org.d3ifcool.lop.models;
 
 /**
- * Created by Lisa Krisnawati on 09/03/2018.
+ * User model.
+ * This data will use to system decide some targets & tips.
  */
 
 public class User {
@@ -11,11 +12,21 @@ public class User {
     private int birthDate;
     private String idPersonality;
 
-    public User(String id, String name, String birthPlace, int birthDate, String idPersonality){
+    /**
+     * Create an Object of User
+     * @param id unique data
+     * @param name name of user
+     * @param birthPlace cityName of user's birthPlace
+     * @param birthDate date when user birth
+     */
+    public User(String id, String name, String birthPlace, int birthDate){
         this.id = id;
         this.name = name;
         this.birthPlace = birthPlace;
         this.birthDate = birthDate;
+    }
+
+    public void setIdPersonality(String idPersonality) {
         this.idPersonality = idPersonality;
     }
 

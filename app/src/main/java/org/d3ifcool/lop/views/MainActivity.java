@@ -1,6 +1,7 @@
 package org.d3ifcool.lop.views;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,5 +37,10 @@ public class MainActivity extends AppCompatActivity {
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+    }
+
+    public void signIn(View view) {
+        startActivity(new Intent(MainActivity.this, TestActivity.class));
+        finish();
     }
 }

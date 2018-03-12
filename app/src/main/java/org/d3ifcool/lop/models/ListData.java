@@ -1,25 +1,24 @@
 package org.d3ifcool.lop.models;
 
 /**
- * Model of Tips.
- * Data Tips will be use to show some advices to user.
+ * Created by CHEVALIER-11 on 12-Mar-18.
  */
 
-public class Tips {
+public class ListData {
     private String id;
     private String name;
     private String desc;
 
     /**
-     * Make an Object of Tips.
+     * Make an Object of List.
      * @param id unique data.
-     * @param name title of the Target.
-     * @param desc description of the Target.
+     * @param name title of the List.
+     * @param desc description of the List.
      */
-    public Tips(String id, String name, String desc){
-        this.id = id;
+    public ListData(String id, String name, String desc){
+        this.id =id;
         this.name = name;
-        this.desc = desc;
+        this.desc =desc;
     }
 
     public String getId() {

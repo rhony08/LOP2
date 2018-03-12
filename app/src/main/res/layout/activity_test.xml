@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="org.d3ifcool.lop.models.PersonalityQuestion"/>
+        <import type="java.util.List"/>
+        <variable name="position" type="int"/>
+        <variable name="question" type="PersonalityQuestion"/>
+        <variable name="questionLists" type="List&lt;PersonalityQuestion&gt;"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_medium">
+
+        <RadioGroup
+            android:id="@+id/radio"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent">
+            <RadioButton
+                android:id="@+id/firstOption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{questionLists.get(position).firstOption}"
+                android:tag="@{questionLists.get(position).firstVal}"
+                android:textSize="@dimen/text_size_medium"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:onClick="onChecked"/>
+
+            <RadioButton
+                android:id="@+id/secondOption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{questionLists.get(position).secondOption}"
+                android:tag="@{questionLists.get(position).secondVal}"
+                android:textSize="@dimen/text_size_medium"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:onClick="onChecked"/>
+
+        </RadioGroup>
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/radio"
+            android:background="@color/colorPrimary"
+            android:textColor="@android:color/white"
+            android:text="@{position &lt; questionLists.size-1 ? @string/next : @string/result}"
+            android:onClick="nextQuestion"/>
+
+    </RelativeLayout>
+</layout>
