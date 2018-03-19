@@ -8,6 +8,7 @@ import android.view.View;
 
 import org.d3ifcool.lop.R;
 import org.d3ifcool.lop.databinding.ActivityResultBinding;
+import org.d3ifcool.lop.models.Character;
 import org.d3ifcool.lop.models.PersonalityType;
 
 public class ResultActivity extends AppCompatActivity {
@@ -17,7 +18,7 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityResultBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_result);
         binding.setPersonalityType(new PersonalityType("id", "INTP", "Description of this Personality Type",
-                "Logician", "image", "idDevTarget"));
+                new Character("1","Logician", "Innovative inventors with an unquenchable thirst for knowledge."), "image"));
     }
 
     public void detailPersonality(View view) {

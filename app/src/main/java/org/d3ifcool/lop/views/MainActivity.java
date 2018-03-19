@@ -7,18 +7,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import org.d3ifcool.lop.R;
 import org.d3ifcool.lop.databinding.ActivityMainBinding;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+//         Add Shared Preference here.
+//         If data null, show activity.
+//         Else intent to Home Activity.
         binding.setbirthdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
                                 calendar.get(Calendar.MONTH) + "/" +
                                 calendar.get(Calendar.DAY_OF_MONTH);
                         binding.setbirthdate.setText(date);
+                        Date birth = calendar.getTime();
+                        binding.setBirthday(birth);
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -40,7 +48,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void signIn(View view) {
-        startActivity(new Intent(MainActivity.this, TestActivity.class));
+        if (binding.name.getText().toString().isEmpty() || binding.getBirthday() == null){
+            Toast.makeText(this, "Semua data harus terisi", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(MainActivity.this, TestActivity.class);
+        Toast.makeText(this, "Berhasil masuk", Toast.LENGTH_SHORT).show();
+        startActivity(intent);
         finish();
     }
 }

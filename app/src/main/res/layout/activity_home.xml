@@ -11,22 +11,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_medium"
-            android:text="Target List"
+            android:text="@string/target_lists"
             android:textSize="@dimen/text_size_medium"
             android:onClick="goToTarget"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_medium"
-            android:text="Tips List"
+            android:text="@string/tips_lists"
             android:textSize="@dimen/text_size_medium"
-            android:onClick="goToTarget"/>
+            android:onClick="goToTips"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_medium"
-            android:text="Achievement List"
+            android:text="@string/achievement_lists"
             android:textSize="@dimen/text_size_medium"
-            android:onClick="goToTarget"/>
+            android:onClick="goToAchieve"/>
     </LinearLayout>
 </layout>

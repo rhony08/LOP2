@@ -5,32 +5,19 @@ package org.d3ifcool.lop.models;
  * Data Tips will be use to show some advices to user.
  */
 
-public class Tips {
-    private String id;
-    private String name;
-    private String desc;
-
+public class Tips  extends Data{
     /**
      * Make an Object of Tips.
      * @param id unique data.
-     * @param name title of the Target.
-     * @param desc description of the Target.
+     * @param name title of the Data.
+     * @param description description of the Data.
      */
-    public Tips(String id, String name, String desc){
-        this.id = id;
-        this.name = name;
-        this.desc = desc;
+    public Tips(String id, String name, String description) {
+        super(id, name, description, -1);
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDesc() {
-        return desc;
+    @Override
+    public int getImage() {
+        return 0;
     }
 }

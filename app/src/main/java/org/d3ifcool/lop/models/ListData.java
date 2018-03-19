@@ -7,18 +7,18 @@ package org.d3ifcool.lop.models;
 public class ListData {
     private String id;
     private String name;
-    private String desc;
+    private String description;
 
     /**
      * Make an Object of List.
      * @param id unique data.
      * @param name title of the List.
-     * @param desc description of the List.
+     * @param description description of the List.
      */
-    public ListData(String id, String name, String desc){
-        this.id =id;
+    public ListData(String id, String name, String description){
+        this.id = id;
         this.name = name;
-        this.desc =desc;
+        this.description = description;
     }
 
     public String getId() {
@@ -30,6 +30,6 @@ public class ListData {
     }
 
     public String getDesc() {
-        return desc;
+        return description;
     }
 }

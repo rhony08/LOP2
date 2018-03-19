@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import org.d3ifcool.lop.R;
 import org.d3ifcool.lop.databinding.ItemListBinding;
-import org.d3ifcool.lop.models.Target;
+import org.d3ifcool.lop.models.Data;
 
 import java.util.List;
 
@@ -16,10 +16,10 @@ import java.util.List;
  */
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BindingHolder> {
-    private List<Target> mLists;
+    private List<? extends Data> mList;
 
-    public ListAdapter(List<Target> mLists) {
-        this.mLists = mLists;
+    public ListAdapter(List<? extends Data> mList) {
+        this.mList = mList;
     }
 
     @Override
@@ -32,12 +32,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.BindingHolder>
 
     @Override
     public void onBindViewHolder(BindingHolder holder, int position) {
-        holder.binding.setTarget(mLists.get(position));
+        holder.binding.setList(mList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mLists == null ? 0 : mLists.size();
+        return mList == null ? 0 : mList.size();
     }
 
     static class BindingHolder extends RecyclerView.ViewHolder {

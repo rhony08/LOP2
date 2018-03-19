@@ -7,27 +7,24 @@ package org.d3ifcool.lop.models;
 public class PersonalityType {
     private String id;
     private String name;
-    private String desc;
-    private String character;
-    private String img;
-    private String devTarget;
+    private String description;
+    private Character character;
+    private String image;
 
     /**
      * Make an Object of Personality Type.
      * @param id unique data
      * @param name unique data
-     * @param desc description of this type
-     * @param character ID of Character
-     * @param img Name/path/link image
-     * @param devTarget ID Target
+     * @param description description of this type
+     * @param character Character of Personality
+     * @param image Name/path/link image
      */
-    public PersonalityType (String id, String name, String desc, String character, String img, String devTarget){
+    public PersonalityType (String id, String name, String description, Character character, String image){
         this.id = id;
         this.name = name;
-        this.desc = desc;
+        this.description = description;
         this.character = character;
-        this.img = img;
-        this.devTarget = devTarget;
+        this.image = image;
     }
 
     public String getId() {
@@ -39,18 +36,15 @@ public class PersonalityType {
     }
 
     public String getDesc() {
-        return desc;
+        return description;
     }
 
     public String getImg() {
-        return img;
+        return image;
     }
 
-    public String getCharacter() {
+    public Character getCharacter() {
         return character;
     }
 
-    public String getDevTarget() {
-        return devTarget;
-    }
 }

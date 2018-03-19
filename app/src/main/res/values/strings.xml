@@ -1,13 +1,16 @@
 <resources>
     <string name="app_name">LOP</string>
     <string name="name">Name</string>
-    <string name="birth_place">Birth Place</string>
     <string name="sign_in">Sign In</string>
     <string name="birthday">Birthdate</string>
-    <string name="click_to_set_date">Click to here Set Date</string>
+    <string name="click_to_set_date">Click here to Set Date</string>
     <string name="next">Next</string>
     <string name="result">Result</string>
     <string name="skip">Skip</string>
+    <string name="achievement_lists">Achievement Lists</string>
+    <string name="tips_lists">Tips Lists</string>
+    <string name="target_lists">Target Lists</string>
+    <string name="position">%d/%d</string>
     <string-array name="genders">
         <item>Male</item>
         <item>Female</item>

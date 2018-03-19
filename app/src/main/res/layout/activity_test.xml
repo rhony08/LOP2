@@ -6,6 +6,7 @@
         <import type="org.d3ifcool.lop.models.PersonalityQuestion"/>
         <import type="java.util.List"/>
         <variable name="position" type="int"/>
+        <variable name="max" type="int"/>
         <variable name="question" type="PersonalityQuestion"/>
         <variable name="questionLists" type="List&lt;PersonalityQuestion&gt;"/>
     </data>
@@ -16,8 +17,18 @@
         android:orientation="vertical"
         android:padding="@dimen/margin_medium">
 
+        <TextView
+            android:id="@+id/position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="1"
+            android:textSize="@dimen/text_size_medium"
+            android:text="@{@string/position(position+1, max)}"
+            android:layout_alignParentRight="true"/>
+
         <RadioGroup
             android:id="@+id/radio"
+            android:layout_below="@+id/position"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
