@@ -7,8 +7,8 @@ package org.d3ifcool.lop.models;
 public class PersonalityQuestion {
     private String firstOption;
     private String secondOption;
-    private int firstVal;
-    private int secondVal;
+    private String firstVal;
+    private String secondVal;
 
     /**
      * Make an Object of Personality Question.
@@ -19,7 +19,7 @@ public class PersonalityQuestion {
      * @param firstVal tag of first option
      * @param secondVal tag of second option
      */
-    public PersonalityQuestion(String firstOption, String secondOption, int firstVal, int secondVal) {
+    public PersonalityQuestion(String firstOption, String secondOption, String firstVal, String secondVal) {
         this.firstOption = firstOption;
         this.secondOption = secondOption;
         this.firstVal = firstVal;
@@ -34,11 +34,11 @@ public class PersonalityQuestion {
         return secondOption;
     }
 
-    public int getFirstVal() {
+    public String getFirstVal() {
         return firstVal;
     }
 
-    public int getSecondVal() {
+    public String getSecondVal() {
         return secondVal;
     }
 }

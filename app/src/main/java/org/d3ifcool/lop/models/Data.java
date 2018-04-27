@@ -21,8 +21,13 @@ public class Data extends ListData {
      * @param desc description of the Data.
      * @param status ONPROGRESS, COMPLETED, FAILED
      */
-    public Data(String id, String name, String desc, int status){
+    public Data(int id, String name, String desc, int status){
         super(id, name, desc);
+        this.status = status;
+    }
+
+    public Data(String name, String desc, int status){
+        super(name, desc);
         this.status = status;
     }
 

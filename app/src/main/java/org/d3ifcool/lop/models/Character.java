@@ -5,7 +5,7 @@ package org.d3ifcool.lop.models;
  */
 
 public class Character extends ListData{
-    public Character(String id, String nama, String desc){
+    public Character(int id, String nama, String desc){
         super(id, nama, desc);
     }
 

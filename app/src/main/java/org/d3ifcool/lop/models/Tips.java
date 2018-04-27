@@ -12,12 +12,16 @@ public class Tips  extends Data{
      * @param name title of the Data.
      * @param description description of the Data.
      */
-    public Tips(String id, String name, String description) {
+    public Tips(int id, String name, String description) {
         super(id, name, description, -1);
+    }
+
+    public Tips(String name, String description) {
+        super(name, description, -1);
     }
 
     @Override
     public int getImage() {
-        return 0;
+        return -1;
     }
 }

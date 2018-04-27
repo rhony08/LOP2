@@ -30,17 +30,12 @@ public class AchievementActivity extends AppCompatActivity {
      */
     public ArrayList<Achievement> fetchData(){
         ArrayList<Achievement> questions = new ArrayList<>();
-        questions.add(new Achievement("Ini Id","Title of Achievement", "Description of Achievement", 1, "bronze"));
-        questions.add(new Achievement("Ini Id","Title of Achievement", "Description of Achievement", 1, "gold"));
-        questions.add(new Achievement("Ini Id","Title of Achievement", "Description of Achievement", 1, "bronze"));
-        questions.add(new Achievement("Ini Id","Title of Achievement", "Description of Achievement", 1, "silver"));
-        questions.add(new Achievement("Ini Id","Title of Achievement", "Description of Achievement", 1, "silver"));
-        questions.add(new Achievement("Ini Id","Title of Achievement", "Description of Achievement", 1, "bronze"));
-        questions.add(new Achievement("Ini Id","Title of Achievement", "Description of Achievement", 1, "gold"));
-        questions.add(new Achievement("Ini Id","Title of Achievement", "Description of Achievement", 1, "silver"));
-        questions.add(new Achievement("Ini Id","Title of Achievement", "Description of Achievement", 1, "gold"));
-        questions.add(new Achievement("Ini Id","Title of Achievement", "Description of Achievement", 1, "gold"));
-        questions.add(new Achievement("Ini Id","Title of Achievement", "Description of Achievement", 1, "bronze"));
+        questions.add(new Achievement(0,"Title of Achievement", "Description of Achievement", 1, "bronze"));
+        questions.add(new Achievement(1,"Title of Achievement", "Description of Achievement", 1, "gold"));
+        questions.add(new Achievement(2,"Title of Achievement", "Description of Achievement", 1, "bronze"));
+        questions.add(new Achievement(3,"Title of Achievement", "Description of Achievement", 1, "silver"));
+        questions.add(new Achievement(4,"Title of Achievement", "Description of Achievement", 1, "silver"));
+        questions.add(new Achievement(5,"Title of Achievement", "Description of Achievement", 1, "bronze"));
         return questions;
     }
 }

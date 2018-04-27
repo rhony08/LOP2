@@ -5,7 +5,7 @@ package org.d3ifcool.lop.models;
  */
 
 public class ListData {
-    private String id;
+    private int id;
     private String name;
     private String description;
 
@@ -15,13 +15,18 @@ public class ListData {
      * @param name title of the List.
      * @param description description of the List.
      */
-    public ListData(String id, String name, String description){
+    public ListData(int id, String name, String description){
         this.id = id;
         this.name = name;
         this.description = description;
     }
 
-    public String getId() {
+    public ListData(String name, String description){
+        this.name = name;
+        this.description = description;
+    }
+
+    public int getId() {
         return id;
     }
 

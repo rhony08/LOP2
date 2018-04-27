@@ -18,7 +18,7 @@ public class DescActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityDescBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_desc);
         binding.setPersonalityType(new PersonalityType("id", "INTP", "Description of this Personality Type",
-                new Character("1","Logician", "Innovative inventors with an unquenchable thirst for knowledge."), "image"));
+                new Character(1,"Logician", "Innovative inventors with an unquenchable thirst for knowledge."), "image"));
     }
 
     public void skip(View view) {

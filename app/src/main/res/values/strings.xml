@@ -15,4 +15,6 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
+    <string name="editor_insert_data_failed">Failed</string>
+    <string name="editor_insert_data_successful">Success</string>
 </resources>

@@ -1,42 +1,66 @@
 package org.d3ifcool.lop.views;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 
 import org.d3ifcool.lop.R;
-import org.d3ifcool.lop.adapters.ListViewAdapter;
+import org.d3ifcool.lop.adapters.DataCursorAdapter;
+import org.d3ifcool.lop.database.LopContract;
+import org.d3ifcool.lop.database.LopDbHelper;
 import org.d3ifcool.lop.databinding.ActivityTargetBinding;
 import org.d3ifcool.lop.models.Tips;
 
 import java.util.ArrayList;
 
-public class TipsActivity extends AppCompatActivity {
+public class TipsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    private DataCursorAdapter mAdapter;
+    private LopDbHelper mDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityTargetBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_target);
-        ListViewAdapter adapter = new ListViewAdapter(this,fetchData());
-        binding.listItem.setAdapter(adapter);
+//        ListViewAdapter adapter = new ListViewAdapter(this,fetchData());
+        mDbHelper = new LopDbHelper(this);
+        mAdapter = new DataCursorAdapter(this, null);
+        binding.listItem.setAdapter(mAdapter);
+
+        getSupportLoaderManager().initLoader(1, null, this);
     }
 
-    /**
-     * Fetch data from database where tips have seen.
-     * @return List
-     */
-    public ArrayList<Tips> fetchData(){
-        ArrayList<Tips> questions = new ArrayList<>();
-        questions.add(new Tips("Ini Id","Title of Tips", "Description of Tips"));
-        questions.add(new Tips("Ini Id","Title of Tips", "Description of Tips"));
-        questions.add(new Tips("Ini Id","Title of Tips", "Description of Tips"));
-        questions.add(new Tips("Ini Id","Title of Tips", "Description of Tips"));
-        questions.add(new Tips("Ini Id","Title of Tips", "Description of Tips"));
-        questions.add(new Tips("Ini Id","Title of Tips", "Description of Tips"));
-        questions.add(new Tips("Ini Id","Title of Tips", "Description of Tips"));
-        questions.add(new Tips("Ini Id","Title of Tips", "Description of Tips"));
-        questions.add(new Tips("Ini Id","Title of Tips", "Description of Tips"));
-        questions.add(new Tips("Ini Id","Title of Tips", "Description of Tips"));
-        return questions;
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        String[] projection = {
+                LopContract.LopEntry._ID,
+                LopContract.LopEntry.COLUMN_TITLE,
+                LopContract.LopEntry.COLUMN_DESC,
+                LopContract.LopEntry.COLUMN_STATUS
+        };
+
+        return new CursorLoader(this,       // Parent activity context
+                LopContract.LopEntry.CONTENT_URI_TIP,   // URI from word table
+                projection,
+                null,
+                null,
+                null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        mAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        mAdapter.swapCursor(null);
     }
 }

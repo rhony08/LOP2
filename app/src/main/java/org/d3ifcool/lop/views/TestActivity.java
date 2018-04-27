@@ -3,6 +3,8 @@ package org.d3ifcool.lop.views;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,11 +13,12 @@ import android.view.View;
 
 import org.d3ifcool.lop.R;
 import org.d3ifcool.lop.databinding.ActivityTestBinding;
+import org.d3ifcool.lop.loader.PersonalityQuestionLoader;
 import org.d3ifcool.lop.models.PersonalityQuestion;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class TestActivity extends AppCompatActivity {
+public class TestActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<PersonalityQuestion>>{
 
     private ActivityTestBinding binding;
     /**
@@ -26,10 +29,13 @@ public class TestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        position = 0;
+        position = -1;
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_test);
         binding.setPosition(position);
-        binding.setQuestionLists(fetchData());
+//        binding.setQuestionLists(fetchData());
+
+        getSupportLoaderManager().initLoader(1, null, this);
     }
 
     /**
@@ -38,24 +44,6 @@ public class TestActivity extends AppCompatActivity {
      */
     public void onChecked(View view) {
         Log.d("pilihan", view.getTag() + "");
-    }
-
-    /**
-     * Fetch data from API server.
-     * Get Personality Questions
-     * @return ArrayList
-     */
-    public ArrayList<PersonalityQuestion> fetchData(){
-        ArrayList<PersonalityQuestion> questions = new ArrayList<>();
-        questions.add(new PersonalityQuestion("Memikirkan sekitar","Memikirkan diri sendiri", 0, 1));
-        questions.add(new PersonalityQuestion("Memikirkan diri sendiri", "Memikirkan sekitar", 1, 0));
-        questions.add(new PersonalityQuestion("Memikirkan sekitar","Memikirkan diri sendiri", 0, 1));
-        questions.add(new PersonalityQuestion("Memikirkan diri sendiri", "Memikirkan sekitar", 1, 0));
-        questions.add(new PersonalityQuestion("Memikirkan sekitar","Memikirkan diri sendiri", 0, 1));
-        questions.add(new PersonalityQuestion("Memikirkan sekitar","Memikirkan diri sendiri", 1, 0));
-        max = questions.size();
-        binding.setMax(max);
-        return questions;
     }
 
     /**
@@ -87,5 +75,28 @@ public class TestActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+
+    @Override
+    public Loader<List<PersonalityQuestion>> onCreateLoader(int id, Bundle args) {
+        return new PersonalityQuestionLoader(this, "https://api.mlab.com/api/1/databases/alision/collections/personality_quizzes?apiKey=l7imVKimQnqNgWqfQ2ST-RpKZqmNBsZg&l=2");
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<PersonalityQuestion>> loader, List<PersonalityQuestion> data) {
+        binding.setQuestionLists(data);
+        max = data.size();
+        binding.setMax(max);
+        position = 0;
+        binding.setPosition(position);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<PersonalityQuestion>> loader) {
+        binding.setQuestionLists(null);
+        max = 0;
+        binding.setMax(max);
+        position = -1;
+        binding.setPosition(position);
     }
 }

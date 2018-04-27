@@ -21,7 +21,7 @@ public class Achievement extends Data {
      * @param description   description of the Data.
      * @param status ONPROGRESS, COMPLETED, FAILED
      */
-    public Achievement(String id, String name, String description, int status, String type) {
+    public Achievement(int id, String name, String description, int status, String type) {
         super(id, name, description, status);
         switch (type){
             case "gold":{
