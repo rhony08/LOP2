@@ -100,7 +100,12 @@ public class JSONHandler {
                 Log.d("JSON", jsonObject.toString());
                 String name = jsonObject.getString("name");
                 String desc = jsonObject.getString("desc");
-                insertData(name, desc, -1, type);
+                if (type != 2) insertData(name, desc, 0, 0, -1, type);
+                else {
+                    int targetCondition = jsonObject.getInt("target");
+                    int tipCondition = jsonObject.getInt("tips");
+                    insertData(name, desc, targetCondition, tipCondition, -1, type);
+                }
             }
             return datas;
         }catch (JSONException ex){
@@ -129,25 +134,30 @@ public class JSONHandler {
         return null;
     }
 
-    private void insertData(String name, String desc, int status, int type){
+    private void insertData(String name, String desc, int targetCondition, int tipsCondition, int status, int type){
         LopDbHelper mDbHelper = new LopDbHelper(mContext);
 
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(LopContract.LopEntry.COLUMN_TITLE, name);
-        values.put(LopContract.LopEntry.COLUMN_DESC, desc);
-        values.put(LopContract.LopEntry.COLUMN_STATUS, status);
+        values.put(LopContract.TargetEntry.COLUMN_TITLE, name);
+        values.put(LopContract.TargetEntry.COLUMN_DESC, desc);
+        values.put(LopContract.TargetEntry.COLUMN_STATUS, status);
 
         // Insert a new pet into the provider, returning the content URI for the new pet.
 
         Uri newUri;
         switch (type){
             case 0:
-                newUri = mContext.getContentResolver().insert(LopContract.LopEntry.CONTENT_URI_TIP, values);
+                newUri = mContext.getContentResolver().insert(LopContract.TipsEntry.CONTENT_URI, values);
                 break;
             case 1:
-                newUri = mContext.getContentResolver().insert(LopContract.LopEntry.CONTENT_URI_TARGET, values);
+                newUri = mContext.getContentResolver().insert(LopContract.TargetEntry.CONTENT_URI, values);
+                break;
+            case 2:
+                values.put(LopContract.AchievesEntry.COLUMN_TARGET_CONDITION, targetCondition);
+                values.put(LopContract.AchievesEntry.COLUMN_TIP_CONDITION, tipsCondition);
+                newUri = mContext.getContentResolver().insert(LopContract.AchievesEntry.CONTENT_URI, values);
                 break;
             default:
                 newUri = null;

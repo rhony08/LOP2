@@ -11,19 +11,17 @@ import java.net.URL;
 import java.util.List;
 
 /**
- * Created by CHEVALIER-11 on 25-Apr-18.
+ * List data loader.
  */
 
 public class DataLoader extends AsyncTaskLoader<List<Data>> {
-    private int mType;
 
     private static final String mUrlTarget = "https://api.mlab.com/api/1/databases/alision/collections/targets?apiKey=l7imVKimQnqNgWqfQ2ST-RpKZqmNBsZg&l=5";
     private static final String mUrlTip = "https://api.mlab.com/api/1/databases/alision/collections/tips?apiKey=l7imVKimQnqNgWqfQ2ST-RpKZqmNBsZg&l=5";
+    private static final String mUrlAchieve = "https://api.mlab.com/api/1/databases/alision/collections/achievements?apiKey=l7imVKimQnqNgWqfQ2ST-RpKZqmNBsZg&l=5";
 
     public DataLoader(Context context) {
         super(context);
-//        this.mType = mType;
-//        this.mUrl = url;
     }
 
     @Override
@@ -34,6 +32,7 @@ public class DataLoader extends AsyncTaskLoader<List<Data>> {
     @Override
     public List<Data> loadInBackground() {
         fetchData(mUrlTip, 0);
+        fetchData(mUrlAchieve, 2);
         return fetchData(mUrlTarget, 1);
     }
 

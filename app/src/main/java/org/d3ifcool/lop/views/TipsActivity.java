@@ -40,14 +40,14 @@ public class TipsActivity extends AppCompatActivity implements LoaderManager.Loa
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
         String[] projection = {
-                LopContract.LopEntry._ID,
-                LopContract.LopEntry.COLUMN_TITLE,
-                LopContract.LopEntry.COLUMN_DESC,
-                LopContract.LopEntry.COLUMN_STATUS
+                LopContract.TipsEntry._ID,
+                LopContract.TipsEntry.COLUMN_TITLE,
+                LopContract.TipsEntry.COLUMN_DESC,
+                LopContract.TipsEntry.COLUMN_STATUS
         };
 
         return new CursorLoader(this,       // Parent activity context
-                LopContract.LopEntry.CONTENT_URI_TIP,   // URI from word table
+                LopContract.TipsEntry.CONTENT_URI,   // URI from word table
                 projection,
                 null,
                 null,

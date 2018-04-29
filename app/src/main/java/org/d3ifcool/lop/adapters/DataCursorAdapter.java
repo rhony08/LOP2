@@ -2,7 +2,6 @@ package org.d3ifcool.lop.adapters;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.databinding.DataBindingUtil;
 import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.d3ifcool.lop.R;
-import org.d3ifcool.lop.database.LopContract;
-import org.d3ifcool.lop.databinding.ItemListBinding;
+import org.d3ifcool.lop.database.LopContract.TargetEntry;
 import org.d3ifcool.lop.models.Data;
 
 /**
@@ -32,10 +30,10 @@ public class DataCursorAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        String title = cursor.getString(cursor.getColumnIndex(LopContract.LopEntry.COLUMN_TITLE));
-        String desc = cursor.getString(cursor.getColumnIndex(LopContract.LopEntry.COLUMN_DESC));
-        int status = cursor.getInt(cursor.getColumnIndex(LopContract.LopEntry.COLUMN_STATUS));
-        int id = cursor.getInt(cursor.getColumnIndex(LopContract.LopEntry._ID));
+        String title = cursor.getString(cursor.getColumnIndex(TargetEntry.COLUMN_TITLE));
+        String desc = cursor.getString(cursor.getColumnIndex(TargetEntry.COLUMN_DESC));
+        int status = cursor.getInt(cursor.getColumnIndex(TargetEntry.COLUMN_STATUS));
+        int id = cursor.getInt(cursor.getColumnIndex(TargetEntry._ID));
 
         Data data = new Data(id, title, desc, status);
 

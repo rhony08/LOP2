@@ -35,14 +35,14 @@ public class TargetActivity extends AppCompatActivity implements LoaderManager.L
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {
-                LopContract.LopEntry._ID,
-                LopContract.LopEntry.COLUMN_TITLE,
-                LopContract.LopEntry.COLUMN_DESC,
-                LopContract.LopEntry.COLUMN_STATUS
+                LopContract.TargetEntry._ID,
+                LopContract.TargetEntry.COLUMN_TITLE,
+                LopContract.TargetEntry.COLUMN_DESC,
+                LopContract.TargetEntry.COLUMN_STATUS
         };
 
         return new CursorLoader(this,       // Parent activity context
-                LopContract.LopEntry.CONTENT_URI_TARGET,   // URI from word table
+                LopContract.TargetEntry.CONTENT_URI,   // URI from word table
                 projection,
                 null,
                 null,

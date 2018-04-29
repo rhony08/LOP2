@@ -11,10 +11,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import org.d3ifcool.lop.database.LopContract.LopEntry;
+import org.d3ifcool.lop.database.LopContract.TargetEntry;
+import org.d3ifcool.lop.database.LopContract.TipsEntry;
+import org.d3ifcool.lop.database.LopContract.AchievesEntry;
 
 /**
- * Created by CHEVALIER-11 on 24-Apr-18.
+ * Database Provider.
  */
 
 public class LopProvider extends ContentProvider{
@@ -25,9 +27,13 @@ public class LopProvider extends ContentProvider{
 
     private static final int TARGET_ID = 101;
 
-    private static final int TIP = 102;
+    private static final int TIP = 200;
 
-    private static final int TIP_ID = 103;
+    private static final int TIP_ID = 201;
+
+    private static final int ACHIEVE = 300;
+
+    private static final int ACHIEVE_ID = 301;
 
     private static UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
@@ -37,6 +43,9 @@ public class LopProvider extends ContentProvider{
 
         sUriMatcher.addURI(LopContract.CONTENT_AUTHORITY, LopContract.PATH_TIP, TIP );
         sUriMatcher.addURI(LopContract.CONTENT_AUTHORITY, LopContract.PATH_TIP + "/#", TIP_ID);
+
+        sUriMatcher.addURI(LopContract.CONTENT_AUTHORITY, LopContract.PATH_ACHIEVE, ACHIEVE );
+        sUriMatcher.addURI(LopContract.CONTENT_AUTHORITY, LopContract.PATH_ACHIEVE + "/#", ACHIEVE_ID);
 
     }
 
@@ -59,20 +68,20 @@ public class LopProvider extends ContentProvider{
 
         switch (match){
             case TARGET:
-                cursor = database.query(LopEntry.TARGETS_TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = database.query(TargetEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             case TARGET_ID:
-                selection = LopEntry._ID + "=?";
+                selection = TargetEntry._ID + "=?";
                 selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
-                cursor = database.query(LopEntry.TARGETS_TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = database.query(TargetEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             case TIP:
-                cursor = database.query(LopEntry.TIPS_TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = database.query(TipsEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             case TIP_ID:
-                selection = LopEntry._ID + "=?";
+                selection = TipsEntry._ID + "=?";
                 selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
-                cursor = database.query(LopEntry.TIPS_TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = database.query(TipsEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             default:
                 throw  new  IllegalArgumentException("Cannot query unknown URI " + uri);
@@ -89,13 +98,13 @@ public class LopProvider extends ContentProvider{
         final int match = sUriMatcher.match(uri);
         switch (match){
             case TARGET:
-                return LopEntry.CONTENT_LIST_TYPE_TARGET;
+                return TargetEntry.CONTENT_LIST_TYPE;
             case TARGET_ID:
-                return LopEntry.CONTENT_ITEM_TYPE_TARGET;
+                return TargetEntry.CONTENT_ITEM_TYPE;
             case TIP:
-                return LopEntry.CONTENT_LIST_TYPE_TIP;
+                return TipsEntry.CONTENT_LIST_TYPE;
             case TIP_ID:
-                return LopEntry.CONTENT_ITEM_TYPE_TIP;
+                return TipsEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new IllegalArgumentException("Unknown uri " + uri + " with match " + match);
         }
@@ -108,26 +117,28 @@ public class LopProvider extends ContentProvider{
 
         switch (match){
             case TARGET:
-                return insertData(uri, contentValues, LopEntry.TARGETS_TABLE_NAME);
+                return insertData(uri, contentValues, TargetEntry.TABLE_NAME);
             case TIP:
-                return insertData(uri, contentValues, LopEntry.TARGETS_TABLE_NAME);
+                return insertData(uri, contentValues, TipsEntry.TABLE_NAME);
+            case ACHIEVE:
+                return insertData(uri, contentValues, AchievesEntry.TABLE_NAME);
             default:
                 throw new IllegalArgumentException("Insertion is not supported for " + uri + " with match " + match);
         }
     }
 
     private Uri insertData (Uri uri, ContentValues values, String tableName){
-        String name = values.getAsString(LopEntry.COLUMN_TITLE);
+        String name = values.getAsString(TargetEntry.COLUMN_TITLE);
         if (name == null){
             Log.e(LOG_TAG,"Data requires a name");
         }
 
-        String desc = values.getAsString(LopEntry.COLUMN_DESC);
+        String desc = values.getAsString(TargetEntry.COLUMN_DESC);
         if (desc == null){
             Log.e(LOG_TAG,"Data requires a description");
         }
 
-        Integer status = values.getAsInteger(LopEntry.COLUMN_STATUS);
+        Integer status = values.getAsInteger(TargetEntry.COLUMN_STATUS);
         if (status != null && status < -2){
             Log.e(LOG_TAG,"Data requires valid status");
         }
@@ -153,17 +164,23 @@ public class LopProvider extends ContentProvider{
         final int match = sUriMatcher.match(uri);
         switch (match){
             case TARGET:
-                return database.delete(LopEntry.TARGETS_TABLE_NAME, selection, selectionArgs);
+                return database.delete(TargetEntry.TABLE_NAME, selection, selectionArgs);
             case TARGET_ID:
-                selection = LopEntry._ID + "=?";
+                selection = TargetEntry._ID + "=?";
                 selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
-                return database.delete(LopEntry.TARGETS_TABLE_NAME, selection, selectionArgs);
+                return database.delete(TargetEntry.TABLE_NAME, selection, selectionArgs);
             case TIP:
-                return database.delete(LopEntry.TIPS_TABLE_NAME, selection, selectionArgs);
+                return database.delete(TipsEntry.TABLE_NAME, selection, selectionArgs);
             case TIP_ID:
-                selection = LopEntry._ID + "=?";
+                selection = TipsEntry._ID + "=?";
                 selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
-                return database.delete(LopEntry.TIPS_TABLE_NAME, selection, selectionArgs);
+                return database.delete(TipsEntry.TABLE_NAME, selection, selectionArgs);
+            case ACHIEVE:
+                return database.delete(TipsEntry.TABLE_NAME, selection, selectionArgs);
+            case ACHIEVE_ID:
+                selection = AchievesEntry._ID + "=?";
+                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+                return database.delete(AchievesEntry.TABLE_NAME, selection, selectionArgs);
             default:
                 throw new IllegalArgumentException("Deleting is not supprted for " + uri);
         }
@@ -175,39 +192,45 @@ public class LopProvider extends ContentProvider{
 
         switch (match){
             case TARGET:
-                return updatePet(uri, contentValues, selection, selectionArgs, LopEntry.TARGETS_TABLE_NAME);
+                return updateData(uri, contentValues, selection, selectionArgs, TargetEntry.TABLE_NAME);
             case TARGET_ID:
-                selection = LopEntry._ID + "=?";
+                selection = TargetEntry._ID + "=?";
                 selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
-                return updatePet(uri, contentValues, selection, selectionArgs, LopEntry.TARGETS_TABLE_NAME);
+                return updateData(uri, contentValues, selection, selectionArgs, TargetEntry.TABLE_NAME);
             case TIP:
-                return updatePet(uri, contentValues, selection, selectionArgs, LopEntry.TIPS_TABLE_NAME);
+                return updateData(uri, contentValues, selection, selectionArgs, TargetEntry.TABLE_NAME);
             case TIP_ID:
-                selection = LopEntry._ID + "=?";
+                selection = TipsEntry._ID + "=?";
                 selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
-                return updatePet(uri, contentValues, selection, selectionArgs, LopEntry.TIPS_TABLE_NAME);
+                return updateData(uri, contentValues, selection, selectionArgs, TipsEntry.TABLE_NAME);
+            case ACHIEVE:
+                return updateData(uri, contentValues, selection, selectionArgs, AchievesEntry.TABLE_NAME);
+            case ACHIEVE_ID:
+                selection = AchievesEntry._ID + "=?";
+                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+                return updateData(uri, contentValues, selection, selectionArgs, AchievesEntry.TABLE_NAME);
             default:
                 throw new IllegalArgumentException("Updating is not supported for " + uri + " with match " + match);
         }
     }
 
-    private int updatePet(Uri uri, ContentValues values, String selection, String[] selectionArgs, String tableName){
-        if (values.containsKey(LopEntry.COLUMN_TITLE)){
-            String name = values.getAsString(LopEntry.COLUMN_TITLE);
+    private int updateData(Uri uri, ContentValues values, String selection, String[] selectionArgs, String tableName){
+        if (values.containsKey(TargetEntry.COLUMN_TITLE)){
+            String name = values.getAsString(TargetEntry.COLUMN_TITLE);
             if (name == null){
                 throw new IllegalArgumentException("Data requires a name");
             }
         }
 
-        if (values.containsKey(LopEntry.COLUMN_DESC)){
-            String desc = values.getAsString(LopEntry.COLUMN_DESC);
+        if (values.containsKey(TargetEntry.COLUMN_DESC)){
+            String desc = values.getAsString(TargetEntry.COLUMN_DESC);
             if (desc == null){
                 throw new IllegalArgumentException("Data requires valid description");
             }
         }
 
-        if (values.containsKey(LopEntry.COLUMN_STATUS)){
-            Integer weight = values.getAsInteger(LopEntry.COLUMN_STATUS);
+        if (values.containsKey(TargetEntry.COLUMN_STATUS)){
+            Integer weight = values.getAsInteger(TargetEntry.COLUMN_STATUS);
             if (weight != null && weight < 0){
                 throw new IllegalArgumentException("Data requires valid status");
             }
@@ -217,6 +240,7 @@ public class LopProvider extends ContentProvider{
             return 0;
         }
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
+        getContext().getContentResolver().notifyChange(uri, null);
         return database.update(tableName, values, selection, selectionArgs);
     }
 }
