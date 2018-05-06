@@ -26,10 +26,12 @@
         <activity android:name=".views.TargetActivity" />
         <activity android:name=".views.TipsActivity" />
         <activity android:name=".views.AchievementActivity" />
+        <activity android:name=".views.EditActivity" />
 
         <provider
-            android:authorities="org.d3ifcool.lop"
-            android:name=".database.LopProvider"/>
+            android:name=".database.LopProvider"
+            android:authorities="org.d3ifcool.lop" />
+
     </application>
 
 </manifest>

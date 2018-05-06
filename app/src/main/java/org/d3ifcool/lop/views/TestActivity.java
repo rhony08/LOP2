@@ -3,6 +3,7 @@ package org.d3ifcool.lop.views;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -43,7 +44,6 @@ public class TestActivity extends AppCompatActivity implements LoaderManager.Loa
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_test);
         binding.setPosition(position);
-//        binding.setQuestionLists(fetchData());
 
         ConnectivityManager cm =
                 (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -110,20 +110,26 @@ public class TestActivity extends AppCompatActivity implements LoaderManager.Loa
      */
     public void nextQuestion(View view) {
         if (position < max-1) {
-            binding.setPosition(++position);
-            binding.firstOption.setChecked(false);
-            binding.secondOption.setChecked(false);
+            if (binding.radio.getCheckedRadioButtonId() == -1){
+                Toast.makeText(this, "Pilihan tidak boleh kosong", Toast.LENGTH_SHORT).show();
+            }else{
+                binding.setPosition(++position);
+                binding.firstOption.setChecked(false);
+                binding.secondOption.setChecked(false);
+            }
         }
         else {
             StringBuilder personalityType = new StringBuilder();
-            personalityType.append((chosed[introvert] >=0 )? "i" : "e");
-            personalityType.append((chosed[sensing] >=0 )? "s" : "n");
-            personalityType.append((chosed[thinking] >=0 )? "t" : "f");
-            personalityType.append((chosed[judging] >=0 )? "j" : "p");
+            personalityType.append((chosed[introvert] >=0 )? "I" : "E");
+            personalityType.append((chosed[sensing] >=0 )? "S" : "N");
+            personalityType.append((chosed[thinking] >=0 )? "T" : "F");
+            personalityType.append((chosed[judging] >=0 )? "J" : "P");
 
-            Intent intent = new Intent(TestActivity.this, ResultActivity.class);
-            intent.putExtra("Personality", personalityType.toString());
-            startActivity(intent);
+            SharedPreferences sharedPreferences = getSharedPreferences("lopApp", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("personality", personalityType.toString());
+            editor.apply();
+            startActivity(new Intent(TestActivity.this, ResultActivity.class));
             finish();
         }
     }
@@ -149,7 +155,7 @@ public class TestActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<List<PersonalityQuestion>> onCreateLoader(int id, Bundle args) {
-        return new PersonalityQuestionLoader(this, "https://api.mlab.com/api/1/databases/alision/collections/personality_quizzes?apiKey=l7imVKimQnqNgWqfQ2ST-RpKZqmNBsZg&l=2");
+        return new PersonalityQuestionLoader(this, "https://api.mlab.com/api/1/databases/alision/collections/personality_quizzes?apiKey=l7imVKimQnqNgWqfQ2ST-RpKZqmNBsZg&l=10");
     }
 
     @Override

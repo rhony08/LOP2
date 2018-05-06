@@ -83,6 +83,14 @@ public class LopProvider extends ContentProvider{
                 selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
                 cursor = database.query(TipsEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
+            case ACHIEVE:
+                cursor = database.query(AchievesEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                break;
+            case ACHIEVE_ID:
+                selection = TipsEntry._ID + "=?";
+                selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
+                cursor = database.query(AchievesEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                break;
             default:
                 throw  new  IllegalArgumentException("Cannot query unknown URI " + uri);
         }
@@ -105,6 +113,10 @@ public class LopProvider extends ContentProvider{
                 return TipsEntry.CONTENT_LIST_TYPE;
             case TIP_ID:
                 return TipsEntry.CONTENT_ITEM_TYPE;
+            case ACHIEVE:
+                return AchievesEntry.CONTENT_LIST_TYPE;
+            case ACHIEVE_ID:
+                return AchievesEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new IllegalArgumentException("Unknown uri " + uri + " with match " + match);
         }
@@ -176,7 +188,7 @@ public class LopProvider extends ContentProvider{
                 selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};
                 return database.delete(TipsEntry.TABLE_NAME, selection, selectionArgs);
             case ACHIEVE:
-                return database.delete(TipsEntry.TABLE_NAME, selection, selectionArgs);
+                return database.delete(AchievesEntry.TABLE_NAME, selection, selectionArgs);
             case ACHIEVE_ID:
                 selection = AchievesEntry._ID + "=?";
                 selectionArgs = new String[] {String.valueOf(ContentUris.parseId(uri))};

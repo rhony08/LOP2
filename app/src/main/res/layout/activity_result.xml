@@ -30,7 +30,7 @@
                 android:textSize="@dimen/text_size_large"
                 android:textAllCaps="true"
                 android:textColor="@android:color/white"
-                android:text="@{personalityType.name}"/>
+                android:text="@{personalityType.type}"/>
 
             <TextView
                 android:layout_margin="@dimen/margin_medium"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_small"
                 android:textColor="@android:color/white"
-                android:text="@{personalityType.character.toString()}"/>
+                android:text="@{personalityType.name}"/>
         </LinearLayout>
         <android.support.design.widget.FloatingActionButton
             android:layout_gravity="center"

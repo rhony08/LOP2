@@ -2,6 +2,7 @@ package org.d3ifcool.lop.views;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,13 +19,23 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        sharedPreferences = getSharedPreferences("lopApp", MODE_PRIVATE);
 //         Add Shared Preference here.
 //         If data null, show activity.
 //         Else intent to Home Activity.
+        String name = sharedPreferences.getString("nameUser", null);
+        if (name != null) {
+            String personality = sharedPreferences.getString("personality", null);
+            startActivity(new Intent(MainActivity.this,
+                    (personality != null) ? HomeActivity.class : TestActivity.class));
+            finish();
+        }
         binding.setbirthdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                         calendar.set(Calendar.DAY_OF_MONTH, i2);
                         String date = calendar.get(Calendar.DAY_OF_MONTH) + "/" +
                                 calendar.get(Calendar.MONTH) + "/" +
-                                calendar.get(Calendar.DAY_OF_MONTH);
+                                calendar.get(Calendar.YEAR);
                         binding.setbirthdate.setText(date);
                         Date birth = calendar.getTime();
                         binding.setBirthday(birth);
@@ -52,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Semua data harus terisi", Toast.LENGTH_SHORT).show();
             return;
         }
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("nameUser", binding.name.getText().toString());
+        editor.putString("birthUser", binding.setbirthdate.getText().toString());
+        editor.apply();
         Intent intent = new Intent(MainActivity.this, TestActivity.class);
         Toast.makeText(this, "Berhasil masuk", Toast.LENGTH_SHORT).show();
         startActivity(intent);

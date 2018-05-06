@@ -16,9 +16,9 @@ import java.util.List;
 
 public class DataLoader extends AsyncTaskLoader<List<Data>> {
 
-    private static final String mUrlTarget = "https://api.mlab.com/api/1/databases/alision/collections/targets?apiKey=l7imVKimQnqNgWqfQ2ST-RpKZqmNBsZg&l=5";
-    private static final String mUrlTip = "https://api.mlab.com/api/1/databases/alision/collections/tips?apiKey=l7imVKimQnqNgWqfQ2ST-RpKZqmNBsZg&l=5";
-    private static final String mUrlAchieve = "https://api.mlab.com/api/1/databases/alision/collections/achievements?apiKey=l7imVKimQnqNgWqfQ2ST-RpKZqmNBsZg&l=5";
+    private static final String mUrlTarget = "https://api.mlab.com/api/1/databases/alision/collections/targets?apiKey=l7imVKimQnqNgWqfQ2ST-RpKZqmNBsZg";
+    private static final String mUrlTip = "https://api.mlab.com/api/1/databases/alision/collections/tips?apiKey=l7imVKimQnqNgWqfQ2ST-RpKZqmNBsZg";
+    private static final String mUrlAchieve = "https://api.mlab.com/api/1/databases/alision/collections/achievements?apiKey=l7imVKimQnqNgWqfQ2ST-RpKZqmNBsZg";
 
     public DataLoader(Context context) {
         super(context);

@@ -1,5 +1,6 @@
 package org.d3ifcool.lop.views;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.databinding.DataBindingUtil;
 import android.support.v4.app.LoaderManager;
@@ -12,9 +13,6 @@ import org.d3ifcool.lop.R;
 import org.d3ifcool.lop.adapters.DataCursorAdapter;
 import org.d3ifcool.lop.database.LopContract;
 import org.d3ifcool.lop.databinding.ActivityTargetBinding;
-import org.d3ifcool.lop.models.Data;
-
-import java.util.ArrayList;
 
 public class TargetActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -30,6 +28,12 @@ public class TargetActivity extends AppCompatActivity implements LoaderManager.L
         binding.listItem.setAdapter(mAdapter);
 
         getSupportLoaderManager().initLoader(1, null, this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(TargetActivity.this, HomeActivity.class));
+        finish();
     }
 
     @Override

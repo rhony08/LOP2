@@ -1,14 +1,18 @@
 package org.d3ifcool.lop.models;
 
+import java.io.Serializable;
+
 /**
  * Model of Personality Type, like INTP, ISTP, etc.
  */
 
-public class PersonalityType {
+public class PersonalityType implements Serializable{
     private String id;
     private String name;
+    private String type;
     private String description;
     private Character character;
+    private String[] characters;
     private String image;
 
     /**
@@ -27,6 +31,14 @@ public class PersonalityType {
         this.image = image;
     }
 
+    public PersonalityType(String id, String name, String type, String description, String[] characters) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.description = description;
+        this.characters = characters;
+    }
+
     public String getId() {
         return id;
     }
@@ -39,12 +51,12 @@ public class PersonalityType {
         return description;
     }
 
-    public String getImg() {
-        return image;
+    public String getType() {
+        return type;
     }
 
-    public Character getCharacter() {
-        return character;
+    public String getDescription() {
+        return description;
     }
 
 }

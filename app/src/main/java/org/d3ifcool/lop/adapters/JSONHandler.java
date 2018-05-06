@@ -3,15 +3,12 @@ package org.d3ifcool.lop.adapters;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.util.Log;
-import android.widget.Toast;
-
-import org.d3ifcool.lop.R;
 import org.d3ifcool.lop.database.LopContract;
 import org.d3ifcool.lop.database.LopDbHelper;
 import org.d3ifcool.lop.models.Data;
 import org.d3ifcool.lop.models.PersonalityQuestion;
+import org.d3ifcool.lop.models.PersonalityType;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -93,12 +90,17 @@ public class JSONHandler {
     public ArrayList<Data> parseJsonToData(String json, int type) {
         try {
             ArrayList<Data> datas = new ArrayList<>();
+            ArrayList<Integer> indexData = new ArrayList<>();
             JSONArray array = new JSONArray(json);
             JSONObject jsonObject = null;
             for (int i = 0; i<array.length(); i++){
-                jsonObject = array.getJSONObject(i);
-                Log.d("JSON", jsonObject.toString());
-                String name = jsonObject.getString("name");
+                int random = (int)(Math.random() * array.length());
+                while (indexData.contains(random)){
+                    random = (int)(Math.random() * array.length());
+                }
+                indexData.add(random);
+                jsonObject = array.getJSONObject(random);
+                String name = jsonObject.getString((type != 2) ? "name" : "title");
                 String desc = jsonObject.getString("desc");
                 if (type != 2) insertData(name, desc, 0, 0, -1, type);
                 else {
@@ -117,10 +119,16 @@ public class JSONHandler {
     public ArrayList<PersonalityQuestion> parseJsonToTestList(String json) {
         try {
             ArrayList<PersonalityQuestion> datas = new ArrayList<>();
+            ArrayList<Integer> indexData = new ArrayList<>();
             JSONArray array = new JSONArray(json);
             JSONObject jsonObject = null;
             for (int i = 0; i<array.length(); i++){
-                jsonObject = array.getJSONObject(i);
+                int random = (int)(Math.random() * array.length());
+                while (indexData.contains(random)){
+                    random = (int)(Math.random() * array.length());
+                }
+                indexData.add(random);
+                jsonObject = array.getJSONObject(random);
                 String option1 = jsonObject.getString("option1");
                 String option2 = jsonObject.getString("option2");
                 String value1 = jsonObject.getString("value1");
@@ -128,6 +136,26 @@ public class JSONHandler {
                 datas.add(new PersonalityQuestion(option1, option2, value1, value2));
             }
             return datas;
+        }catch (JSONException ex){
+            Log.e(null, ex.toString());
+        }
+        return null;
+    }
+
+    public PersonalityType parseJsonToPersonality(String json) {
+        try {
+            JSONArray array = new JSONArray(json);
+            JSONObject jsonObject = null;
+            jsonObject = array.getJSONObject(0);
+            String type = jsonObject.getString("type");
+            String name = jsonObject.getString("name");
+            String desc = jsonObject.getString("desc");
+            JSONArray characters = jsonObject.getJSONArray("character");
+            String[] chars = new String[characters.length()];
+            for (int i = 0; i < characters.length(); i++) {
+                chars[i] = characters.getString(i);
+            }
+            return new PersonalityType("0", name, type, desc, chars);
         }catch (JSONException ex){
             Log.e(null, ex.toString());
         }
@@ -144,40 +172,21 @@ public class JSONHandler {
         values.put(LopContract.TargetEntry.COLUMN_DESC, desc);
         values.put(LopContract.TargetEntry.COLUMN_STATUS, status);
 
-        // Insert a new pet into the provider, returning the content URI for the new pet.
+        // Insert a new data into the provider.
 
-        Uri newUri;
         switch (type){
             case 0:
-                newUri = mContext.getContentResolver().insert(LopContract.TipsEntry.CONTENT_URI, values);
+                mContext.getContentResolver().insert(LopContract.TipsEntry.CONTENT_URI, values);
+                Log.d("Test", "Sukses");
                 break;
             case 1:
-                newUri = mContext.getContentResolver().insert(LopContract.TargetEntry.CONTENT_URI, values);
+                mContext.getContentResolver().insert(LopContract.TargetEntry.CONTENT_URI, values);
                 break;
             case 2:
                 values.put(LopContract.AchievesEntry.COLUMN_TARGET_CONDITION, targetCondition);
                 values.put(LopContract.AchievesEntry.COLUMN_TIP_CONDITION, tipsCondition);
-                newUri = mContext.getContentResolver().insert(LopContract.AchievesEntry.CONTENT_URI, values);
+                mContext.getContentResolver().insert(LopContract.AchievesEntry.CONTENT_URI, values);
                 break;
-            default:
-                newUri = null;
-        }
-
-        // Show a toast message depending on whether or not the insertion was successful
-        if (newUri == null) {
-            // If the new content URI is null, then there was an error with insertion.
-            Log.d("JSON", "Gagal");
-        } else {
-            // Otherwise, the insertion was successful and we can display a toast.
-            Log.d("JSON", "Sukses");
-            switch (type){
-                case 0:
-                    Log.d("JSON", "Tips");
-                    break;
-                case 1:
-                    Log.d("JSON", "Targets");
-                    break;
-            }
         }
     }
 }

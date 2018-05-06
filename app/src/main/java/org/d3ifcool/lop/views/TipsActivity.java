@@ -1,5 +1,6 @@
 package org.d3ifcool.lop.views;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.databinding.DataBindingUtil;
@@ -14,9 +15,6 @@ import org.d3ifcool.lop.adapters.DataCursorAdapter;
 import org.d3ifcool.lop.database.LopContract;
 import org.d3ifcool.lop.database.LopDbHelper;
 import org.d3ifcool.lop.databinding.ActivityTargetBinding;
-import org.d3ifcool.lop.models.Tips;
-
-import java.util.ArrayList;
 
 public class TipsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -33,6 +31,12 @@ public class TipsActivity extends AppCompatActivity implements LoaderManager.Loa
         binding.listItem.setAdapter(mAdapter);
 
         getSupportLoaderManager().initLoader(1, null, this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(TipsActivity.this, HomeActivity.class));
+        finish();
     }
 
     @Override
