@@ -32,6 +32,8 @@
             android:name=".database.LopProvider"
             android:authorities="org.d3ifcool.lop" />
 
+        <activity android:name=".views.AlarmActivity" />
+        <activity android:name=".views.DescriptionTargetActivity"></activity>
     </application>
 
 </manifest>

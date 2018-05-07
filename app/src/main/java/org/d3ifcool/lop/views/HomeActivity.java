@@ -1,5 +1,6 @@
 package org.d3ifcool.lop.views;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,12 +17,18 @@ import android.widget.Toast;
 import org.d3ifcool.lop.R;
 import org.d3ifcool.lop.loader.DataLoader;
 import org.d3ifcool.lop.models.Data;
+import org.d3ifcool.lop.services.AlarmReceiver;
 
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Data>> {
 
     private SharedPreferences sharedPreferences;
+
+    private static final int ALARM_REQUEST_CODE = 133;
+
+    //Pending intent instance
+    private PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +38,11 @@ public class HomeActivity extends AppCompatActivity implements LoaderManager.Loa
         sharedPreferences = getSharedPreferences("lopApp", MODE_PRIVATE);
 
         boolean isInserted = sharedPreferences.getBoolean("isInserted", false);
+
+        /* Retrieve a PendingIntent that will perform a broadcast */
+        Intent alarmIntent = new Intent(HomeActivity.this, AlarmReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(HomeActivity.this, ALARM_REQUEST_CODE, alarmIntent, 0);
+
 
         ConnectivityManager cm =
                 (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);

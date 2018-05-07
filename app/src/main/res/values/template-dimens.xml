@@ -4,6 +4,7 @@
     <dimen name="margin_medium">16dp</dimen>
     <dimen name="text_size_small">16sp</dimen>
     <dimen name="text_size_medium">20sp</dimen>
+    <dimen name="text_size_minlarge">30sp</dimen>
     <dimen name="text_size_large">60sp</dimen>
     <dimen name="size_use_weight">0dp</dimen>
 </resources>

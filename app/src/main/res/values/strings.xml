@@ -17,4 +17,7 @@
     </string-array>
     <string name="editor_insert_data_failed">Failed</string>
     <string name="editor_insert_data_successful">Success</string>
+    <string name="lets_do_a_target">Lets Do a Target</string>
+    <string name="do_it_now">Do It Now!</string>
+    <string name="skip_it">Skip!</string>
 </resources>

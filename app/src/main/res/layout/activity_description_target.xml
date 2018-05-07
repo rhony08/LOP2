@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="name"
+            type="String"/>
+        <variable
+            name="desc"
+            type="String"/>
+    </data>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        tools:context="org.d3ifcool.lop.views.ResultActivity">
+
+        <TextView
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_minlarge"
+            tools:text="Test"
+            android:text="@{name}"/>
+
+        <TextView
+            android:layout_margin="@dimen/margin_medium"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_small"
+            tools:text="Test"
+            android:text="@{desc}"/>
+    </LinearLayout>
+</layout>

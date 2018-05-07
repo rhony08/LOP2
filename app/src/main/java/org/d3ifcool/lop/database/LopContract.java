@@ -35,9 +35,6 @@ public class LopContract {
         public final static String COLUMN_DESC = "desc";
         public final static String COLUMN_STATUS = "status";
 
-        public  final static int GENDER_MALE = 0;
-        public  final static int GENDER_FEMALE = 1;
-
         public  final static int COMPLETED_STATUS = 1;
         public  final static int ONPROGRESS_STATUS = 2;
         public  final static int FAILED_STATUS = 0;
@@ -63,8 +60,6 @@ public class LopContract {
         public final static String COLUMN_STATUS = "status";
 
         public  final static int COMPLETED_STATUS = 1;
-        public  final static int ONPROGRESS_STATUS = 2;
-        public  final static int FAILED_STATUS = 0;
         public  final static int LOCKED_STATUS = -1;
 
     }
